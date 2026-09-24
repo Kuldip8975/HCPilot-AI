@@ -19,8 +19,8 @@ passlib[bcrypt]==1.7.4
 python-dotenv==1.0.0
 
 # AI & LangGraph - UPDATED VERSIONS
-langgraph==0.0.20
-langchain==0.1.0
+langgraph>=0.0.20
+langchain>=0.1.0
 langchain-groq>=0.1.0
 groq>=0.11.0,<1.0.0
 langfuse>=3.0.0
