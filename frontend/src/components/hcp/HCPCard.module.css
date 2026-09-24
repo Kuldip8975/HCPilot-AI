@@ -1,0 +1,183 @@
+.hcpCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.hcpCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+}
+
+.cardHeader {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.avatarContainer {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+
+.statusDot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+
+.headerInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.hcpName {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.hcpTitle {
+  display: block;
+  font-size: 0.8125rem;
+  color: #475569;
+  font-weight: 500;
+}
+
+.hcpSpecialty {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #2563eb;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  background: rgba(37, 99, 235, 0.1);
+  border-radius: 4px;
+  margin-top: 0.25rem;
+}
+
+.cardBody {
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.detailRow svg {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.detailLink {
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.detailLink:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.viewButton,
+.interactButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  border: none;
+}
+
+.viewButton {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.viewButton:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.interactButton {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.interactButton:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+}
+
+@media (max-width: 768px) {
+  .hcpCard {
+    padding: 1rem;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .hcpName {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardActions {
+    flex-direction: column;
+  }
+
+  .viewButton,
+  .interactButton {
+    padding: 0.625rem;
+  }
+}

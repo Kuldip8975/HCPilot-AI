@@ -1,0 +1,35 @@
+[
+  {"input": "Log a meeting with Dr. Sarah Chen, discussed Product X, positive sentiment", "expected_intent": "log_interaction"},
+  {"input": "I had a call with Dr. James Wilson about the new cardiology guidelines", "expected_intent": "log_interaction"},
+  {"input": "Met Dr. Sarah Chen today, she was very positive about the trial results", "expected_intent": "log_interaction"},
+  {"input": "Sent an email to Dr. James Wilson regarding sample requests", "expected_intent": "log_interaction"},
+
+  {"input": "Search for Dr. Sarah Chen", "expected_intent": "search_hcp"},
+  {"input": "Find Dr. James Wilson", "expected_intent": "search_hcp"},
+  {"input": "Look up oncology specialists", "expected_intent": "search_hcp"},
+  {"input": "Search for cardiologists in New York", "expected_intent": "search_hcp"},
+
+  {"input": "Show me my recent interaction history", "expected_intent": "view_history"},
+  {"input": "What have I logged recently?", "expected_intent": "view_history"},
+  {"input": "Show my past interactions", "expected_intent": "view_history"},
+  {"input": "List my recent visits", "expected_intent": "view_history"},
+
+  {"input": "Schedule a follow-up with Dr. Sarah Chen next week", "expected_intent": "schedule_followup"},
+  {"input": "Set a reminder to follow up with Dr. James Wilson tomorrow", "expected_intent": "schedule_followup"},
+  {"input": "I need to follow up with Dr. Sarah Chen in 2 weeks", "expected_intent": "schedule_followup"},
+  {"input": "Remind me to check in with Dr. James Wilson next Monday", "expected_intent": "schedule_followup"},
+
+  {"input": "Edit my last interaction with Dr. Sarah Chen, change sentiment to neutral", "expected_intent": "edit_interaction"},
+  {"input": "Update the notes for my meeting with Dr. James Wilson", "expected_intent": "edit_interaction"},
+  {"input": "Change the summary of my last visit with Dr. Sarah Chen", "expected_intent": "edit_interaction"},
+  {"input": "Modify my recent interaction with Dr. James Wilson", "expected_intent": "edit_interaction"},
+
+  {"input": "Show me analytics on my interactions", "expected_intent": "analyze_trends"},
+  {"input": "Give me a summary of engagement trends", "expected_intent": "analyze_trends"},
+  {"input": "How many interactions have I logged?", "expected_intent": "analyze_trends"},
+  {"input": "Show my performance stats", "expected_intent": "analyze_trends"},
+
+  {"input": "hey", "expected_intent": "generic_response"},
+  {"input": "thank you", "expected_intent": "generic_response"},
+  {"input": "what can you help me with?", "expected_intent": "generic_response"}
+]

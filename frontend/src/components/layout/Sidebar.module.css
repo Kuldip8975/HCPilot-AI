@@ -1,0 +1,281 @@
+/* ============================================================
+   Sidebar — HcPilot AI
+   ============================================================ */
+
+/* ---------- Sidebar shell ---------- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 260px;                          /* was 240px — more label room */
+  background: linear-gradient(180deg, #0f172a 0%, #1a1a2e 100%);
+  border-right: 1px solid rgba(148, 163, 184, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.75rem 0.75rem;
+  z-index: 100;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.closed {
+  transform: translateX(-100%);
+}
+
+.open {
+  transform: translateX(0);
+}
+
+/* ---------- Overlay (mobile) ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+  z-index: 99;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- Close button ---------- */
+.closeButton {
+  position: absolute;
+  top: 0.875rem;
+  right: 0.875rem;
+  display: none; /* hidden on desktop */
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid #a5b4fc;
+  outline-offset: 2px;
+}
+
+/* ---------- Brand header ---------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.625rem 1.25rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.logoTitle {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.logoSubtitle {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  color: #a78bfa;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.25rem 0;
+  scrollbar-gutter: stable;              /* prevents layout shift when scrollbar appears */
+}
+
+/* Custom scrollbar */
+.nav::-webkit-scrollbar {
+  width: 6px;
+}
+.nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.nav::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 3px;
+}
+.nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.28);
+}
+
+/* ---------- Nav items ---------- */
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  position: relative;
+  white-space: nowrap;
+  outline: none;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+}
+
+.navItem:hover .navIcon {
+  color: #cbd5e1;
+}
+
+.navItem:active {
+  transform: scale(0.985);
+}
+
+.navItem:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1.5px #6366f1;
+}
+
+/* Active state */
+.navItem.active {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.2),
+    rgba(139, 92, 246, 0.16)
+  );
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px -4px rgba(99, 102, 241, 0.35);
+}
+
+/* Left accent bar on active */
+.navItem.active::before {
+  content: '';
+  position: absolute;
+  left: -0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 22px;
+  background: linear-gradient(180deg, #60a5fa, #a78bfa);
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+/* Active icon color */
+.navItem.active .navIcon {
+  color: #a5b4fc;
+}
+
+/* ---------- Nav icon + label ---------- */
+.navIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: inherit;
+  transition: color 0.15s ease;
+}
+
+.navLabel {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Bottom section ---------- */
+.bottomSection {
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.version {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.6875rem;
+  color: #64748b;
+  padding: 0.5rem;
+  letter-spacing: 0.2px;
+}
+
+.versionDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.15);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Desktop: sidebar always visible, no close button */
+@media (min-width: 961px) {
+  .sidebar {
+    transform: translateX(0) !important;
+  }
+
+  .overlay {
+    display: none;
+  }
+}
+
+/* Mobile / tablet: off-canvas with overlay */
+@media (max-width: 960px) {
+  .closeButton {
+    display: flex;
+  }
+
+  .sidebar {
+    width: 280px;
+    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .navItem,
+  .closeButton {
+    transition-duration: 0.01ms !important;
+  }
+  .overlay {
+    animation: none;
+  }
+}

@@ -1,0 +1,660 @@
+/* ============================================================
+   AnalyticsPage — HcPilot AI
+   ============================================================ */
+
+.analyticsPage {
+  padding: 0;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 0.9375rem;
+  color: #64748b;
+  margin: 0.375rem 0 0 0;
+  line-height: 1.5;
+}
+
+.headerControls {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+/* ---------- Time range selector ---------- */
+.timeRangeSelector {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  color: #64748b;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  height: 38px;
+}
+
+.timeRangeSelector:hover {
+  border-color: #cbd5e1;
+}
+
+.timeRangeSelector:focus-within {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.timeRangeSelector > svg {
+  color: #6366f1;
+  flex-shrink: 0;
+}
+
+.timeSelect {
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  color: #0f172a;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  padding-right: 0.125rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.timeSelect:focus-visible {
+  outline: none;
+}
+
+/* ---------- Export button (kept for future use) ---------- */
+.exportButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  height: 38px;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px -4px rgba(37, 99, 235, 0.5);
+}
+
+.exportButton:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px -8px rgba(37, 99, 235, 0.6);
+}
+
+.exportButton:active {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Metrics grid
+   ============================================================ */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.metricCard {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  overflow: hidden;
+  animation: slideUp 0.35s ease-out backwards;
+}
+
+.metricCard:nth-child(1) { animation-delay: 0.03s; }
+.metricCard:nth-child(2) { animation-delay: 0.06s; }
+.metricCard:nth-child(3) { animation-delay: 0.09s; }
+.metricCard:nth-child(4) { animation-delay: 0.12s; }
+
+/* Top accent bar that reveals on hover */
+.metricCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.metricCard:hover::before {
+  transform: scaleX(1);
+}
+
+.metricCard:hover {
+  transform: translateY(-3px);
+  border-color: #cbd5e1;
+  box-shadow: 0 12px 24px -16px rgba(15, 23, 42, 0.18);
+}
+
+/* ---------- Metric header ---------- */
+.metricHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.875rem;
+}
+
+.metricIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  box-shadow: 0 4px 12px -4px rgba(15, 23, 42, 0.25);
+}
+
+/* ---------- Trend pill ---------- */
+.metricChange {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  letter-spacing: 0.2px;
+}
+
+.metricChange.up {
+  color: #15803d;
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.metricChange.down {
+  color: #b91c1c;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+/* ---------- Value + title ---------- */
+.metricValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.metricTitle {
+  font-size: 0.8125rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 0.3125rem;
+}
+
+/* ============================================================
+   Charts section
+   ============================================================ */
+.chartsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.chartCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.chartCard:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 12px 24px -20px rgba(15, 23, 42, 0.15);
+}
+
+.chartHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chartTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.chartTitle svg {
+  color: #6366f1;
+  flex-shrink: 0;
+}
+
+.chartSubtitle {
+  font-size: 0.8125rem;
+  color: #94a3b8;
+}
+
+.chartsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* ============================================================
+   Bar chart
+   ============================================================ */
+.barChart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 200px;
+  padding-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.barGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.bar {
+  width: 100%;
+  max-width: 40px;
+  border-radius: 6px 6px 0 0;
+  min-height: 4px;
+  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.15s ease;
+  box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.05);
+}
+
+.barGroup:hover .bar {
+  filter: brightness(1.1);
+}
+
+.barLabel {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.barValue {
+  font-size: 0.7rem;
+  color: #475569;
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 0.125rem;
+}
+
+/* ============================================================
+   Interaction types list
+   ============================================================ */
+.typeList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.typeItem {
+  display: grid;
+  grid-template-columns: minmax(100px, auto) 40px 1fr;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.typeInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.typeDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.typeName {
+  font-size: 0.875rem;
+  color: #1e293b;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.typeCount {
+  font-size: 0.875rem;
+  color: #475569;
+  font-weight: 700;
+  text-align: right;
+}
+
+.typeBar {
+  height: 8px;
+  background: #f1f5f9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.typeBarFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   Top HCP list
+   ============================================================ */
+.topHCPList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.topHCPItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 10px;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.topHCPItem:hover {
+  background: #f8fafc;
+  transform: translateX(2px);
+}
+
+.topHCPRank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 26px;
+  padding: 0 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 7px;
+  letter-spacing: -0.2px;
+  flex-shrink: 0;
+}
+
+/* Emphasize the #1 rank */
+.topHCPItem:first-child .topHCPRank {
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  box-shadow: 0 4px 10px -4px rgba(37, 99, 235, 0.5);
+}
+
+.topHCPInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.topHCPName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topHCPSpecialty {
+  font-size: 0.75rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+.topHCPCount {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Tablet: single column for charts row */
+@media (max-width: 1024px) {
+  .chartsRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Small tablet */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.875rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .headerControls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .timeRangeSelector {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .timeSelect {
+    flex: 1;
+    text-align: right;
+  }
+
+  .exportButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.875rem;
+  }
+
+  .metricValue {
+    font-size: 1.5rem;
+  }
+
+  .metricIcon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .barChart {
+    height: 160px;
+  }
+
+  .chartCard {
+    padding: 1.25rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .chartCard {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .typeItem {
+    grid-template-columns: minmax(90px, auto) 36px 1fr;
+    gap: 0.5rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .metricsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.625rem;
+  }
+
+  .metricCard {
+    padding: 0.875rem;
+    border-radius: 12px;
+  }
+
+  .metricIcon {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+
+  .metricIcon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .metricValue {
+    font-size: 1.25rem;
+  }
+
+  .metricTitle {
+    font-size: 0.7rem;
+  }
+
+  .metricChange {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.375rem;
+  }
+
+  .barChart {
+    height: 130px;
+    gap: 0.375rem;
+  }
+
+  .barLabel,
+  .barValue {
+    font-size: 0.625rem;
+  }
+
+  .typeInfo {
+    min-width: 70px;
+  }
+
+  .typeName {
+    font-size: 0.75rem;
+  }
+
+  .topHCPItem {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .topHCPRank {
+    min-width: 28px;
+    height: 24px;
+    font-size: 0.6875rem;
+  }
+
+  .topHCPName {
+    font-size: 0.8125rem;
+  }
+
+  .topHCPCount {
+    font-size: 0.75rem;
+  }
+}
+
+/* Tiny screens */
+@media (max-width: 360px) {
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .analyticsPage,
+  .metricCard {
+    animation: none;
+  }
+
+  .metricCard,
+  .chartCard,
+  .bar,
+  .typeBarFill,
+  .topHCPItem,
+  .exportButton,
+  .timeRangeSelector {
+    transition-duration: 0.01ms !important;
+  }
+}

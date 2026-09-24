@@ -1,0 +1,110 @@
+.quickActions {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 1rem 0;
+}
+
+.actionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.actionButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 0.75rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  transform: translateY(-4px);
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.08);
+}
+
+.actionButton:active {
+  transform: translateY(-2px);
+}
+
+.actionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.actionButton:hover .actionIcon {
+  transform: scale(1.05);
+}
+
+.actionLabel {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #1e293b;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .actionsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .actionButton {
+    padding: 1rem 0.5rem;
+  }
+
+  .actionIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .actionIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .actionLabel {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .actionsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .actionButton {
+    padding: 0.75rem 0.25rem;
+  }
+
+  .actionIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .actionIcon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .actionLabel {
+    font-size: 0.65rem;
+  }
+}

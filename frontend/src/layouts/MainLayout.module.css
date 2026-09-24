@@ -1,0 +1,110 @@
+/* ============================================================
+   MainLayout — content properly offset from fixed sidebar
+   ============================================================ */
+
+.mainLayout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f8fafc;
+}
+
+/* ---------- Main content wrapper ---------- */
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
+  width: 100%;
+  transition: margin-left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-x: clip;                     /* 🔧 better than hidden for sticky children */
+  position: relative;                   /* 🔧 creates stacking context */
+  z-index: 10;                          /* 🔧 sits above sidebar edge */
+}
+
+/* 🔧 THE FIX: reserve 260px (was 240px) — matches Sidebar width */
+.sidebarOpen {
+  margin-left: 260px;
+}
+
+.sidebarClosed {
+  margin-left: 0;
+}
+
+/* ---------- Content area ---------- */
+.contentArea {
+  flex: 1;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  overflow-x: clip;
+}
+
+.contentWrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Custom scrollbar ---------- */
+.contentArea::-webkit-scrollbar {
+  width: 6px;
+}
+.contentArea::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+.contentArea::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+.contentArea::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ============================================================
+   Responsive — sidebar becomes off-canvas on mobile
+   ============================================================ */
+@media (max-width: 960px) {
+  /* Both states collapse to 0 — sidebar is a drawer overlay on mobile */
+  .sidebarOpen,
+  .sidebarClosed {
+    margin-left: 0;
+  }
+
+  /* Lower content z-index below 960px so the sidebar drawer sits on top */
+  .mainContent {
+    z-index: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .contentArea {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contentArea {
+    padding: 0.75rem;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .mainContent {
+    transition-duration: 0.01ms !important;
+  }
+  .contentWrapper {
+    animation: none;
+  }
+}

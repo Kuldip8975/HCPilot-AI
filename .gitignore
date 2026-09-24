@@ -1,0 +1,65 @@
+# Environment files - DON'T PUSH THESE!
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+venv/
+env/
+ENV/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+dist/
+build/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# Docker
+.dockerignore
+
+# Frontend
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/node_modules/
+
+# Backend
+backend/__pycache__/
+backend/logs/
+backend/migrations/versions/*.py
+!backend/migrations/versions/__init__.py
+# env examples excluded - contain real values in this project
+*.env.example
+.env.example

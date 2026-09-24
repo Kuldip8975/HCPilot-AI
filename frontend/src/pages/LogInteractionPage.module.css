@@ -1,0 +1,263 @@
+/* ============================================================
+   LogInteractionPage — HcPilot AI
+   ============================================================ */
+
+.logInteractionPage {
+  padding: 0;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  min-width: 0;
+}
+
+/* ---------- Back button ---------- */
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  margin-top: 0.125rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.backButton:hover {
+  color: #0f172a;
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.backButton:active {
+  background: #f1f5f9;
+}
+
+.backButton:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+.backButton svg {
+  flex-shrink: 0;
+}
+
+/* ---------- Title block ---------- */
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 0.9375rem;
+  color: #64748b;
+  margin: 0.375rem 0 0 0;
+  line-height: 1.5;
+}
+
+.subtitle strong {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* ============================================================
+   Two-panel layout
+   ============================================================ */
+.splitContent {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ---------- Form panel ---------- */
+.formPanel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 2rem;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.formPanel:focus-within {
+  border-color: #c7d2fe;
+  box-shadow: 0 8px 24px -16px rgba(37, 99, 235, 0.25);
+}
+
+/* ---------- Chat panel (sticky on desktop) ---------- */
+.chatPanel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  position: sticky;
+  top: 1rem;
+  height: 620px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.chatPanel:focus-within {
+  border-color: #c7d2fe;
+  box-shadow: 0 8px 24px -16px rgba(124, 58, 237, 0.25);
+}
+
+/* Legacy wrapper — kept for compatibility */
+.content {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 2rem;
+  min-height: 500px;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Tablet landscape: stack the panels */
+@media (max-width: 1024px) {
+  .splitContent {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .chatPanel {
+    position: static;
+    height: 540px;
+  }
+}
+
+/* Tablet portrait */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .headerLeft {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .backButton {
+    align-self: flex-start;
+    margin-top: 0;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+  }
+
+  .content,
+  .formPanel {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .chatPanel {
+    border-radius: 12px;
+    height: 500px;
+  }
+}
+
+/* Mobile: tighter */
+@media (max-width: 640px) {
+  .splitContent {
+    gap: 1rem;
+  }
+
+  .formPanel {
+    padding: 1.25rem;
+  }
+
+  .chatPanel {
+    height: 460px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.8125rem;
+  }
+
+  .content,
+  .formPanel {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .chatPanel {
+    border-radius: 10px;
+    height: 420px;
+  }
+
+  /* Hide the "Back" text label, keep icon only */
+  .backButton {
+    padding: 0.375rem;
+  }
+
+  .backButton span,
+  .backButton + span {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .logInteractionPage {
+    animation: none;
+  }
+
+  .backButton,
+  .formPanel,
+  .chatPanel {
+    transition-duration: 0.01ms !important;
+  }
+}

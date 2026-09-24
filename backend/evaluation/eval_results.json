@@ -1,0 +1,197 @@
+{
+  "overall_accuracy": 96.29629629629629,
+  "per_tool": {
+    "log_interaction": {
+      "correct": 4,
+      "total": 4
+    },
+    "search_hcp": {
+      "correct": 4,
+      "total": 4
+    },
+    "view_history": {
+      "correct": 4,
+      "total": 4
+    },
+    "schedule_followup": {
+      "correct": 4,
+      "total": 4
+    },
+    "edit_interaction": {
+      "correct": 4,
+      "total": 4
+    },
+    "analyze_trends": {
+      "correct": 3,
+      "total": 4
+    },
+    "generic_response": {
+      "correct": 3,
+      "total": 3
+    }
+  },
+  "results": [
+    {
+      "input": "Log a meeting with Dr. Sarah Chen, discussed Product X, positive sentiment",
+      "expected": "log_interaction",
+      "actual": "log_interaction",
+      "correct": true
+    },
+    {
+      "input": "I had a call with Dr. James Wilson about the new cardiology guidelines",
+      "expected": "log_interaction",
+      "actual": "log_interaction",
+      "correct": true
+    },
+    {
+      "input": "Met Dr. Sarah Chen today, she was very positive about the trial results",
+      "expected": "log_interaction",
+      "actual": "log_interaction",
+      "correct": true
+    },
+    {
+      "input": "Sent an email to Dr. James Wilson regarding sample requests",
+      "expected": "log_interaction",
+      "actual": "log_interaction",
+      "correct": true
+    },
+    {
+      "input": "Search for Dr. Sarah Chen",
+      "expected": "search_hcp",
+      "actual": "search_hcp",
+      "correct": true
+    },
+    {
+      "input": "Find Dr. James Wilson",
+      "expected": "search_hcp",
+      "actual": "search_hcp",
+      "correct": true
+    },
+    {
+      "input": "Look up oncology specialists",
+      "expected": "search_hcp",
+      "actual": "search_hcp",
+      "correct": true
+    },
+    {
+      "input": "Search for cardiologists in New York",
+      "expected": "search_hcp",
+      "actual": "search_hcp",
+      "correct": true
+    },
+    {
+      "input": "Show me my recent interaction history",
+      "expected": "view_history",
+      "actual": "view_history",
+      "correct": true
+    },
+    {
+      "input": "What have I logged recently?",
+      "expected": "view_history",
+      "actual": "view_history",
+      "correct": true
+    },
+    {
+      "input": "Show my past interactions",
+      "expected": "view_history",
+      "actual": "view_history",
+      "correct": true
+    },
+    {
+      "input": "List my recent visits",
+      "expected": "view_history",
+      "actual": "view_history",
+      "correct": true
+    },
+    {
+      "input": "Schedule a follow-up with Dr. Sarah Chen next week",
+      "expected": "schedule_followup",
+      "actual": "schedule_followup",
+      "correct": true
+    },
+    {
+      "input": "Set a reminder to follow up with Dr. James Wilson tomorrow",
+      "expected": "schedule_followup",
+      "actual": "schedule_followup",
+      "correct": true
+    },
+    {
+      "input": "I need to follow up with Dr. Sarah Chen in 2 weeks",
+      "expected": "schedule_followup",
+      "actual": "schedule_followup",
+      "correct": true
+    },
+    {
+      "input": "Remind me to check in with Dr. James Wilson next Monday",
+      "expected": "schedule_followup",
+      "actual": "schedule_followup",
+      "correct": true
+    },
+    {
+      "input": "Edit my last interaction with Dr. Sarah Chen, change sentiment to neutral",
+      "expected": "edit_interaction",
+      "actual": "edit_interaction",
+      "correct": true
+    },
+    {
+      "input": "Update the notes for my meeting with Dr. James Wilson",
+      "expected": "edit_interaction",
+      "actual": "edit_interaction",
+      "correct": true
+    },
+    {
+      "input": "Change the summary of my last visit with Dr. Sarah Chen",
+      "expected": "edit_interaction",
+      "actual": "edit_interaction",
+      "correct": true
+    },
+    {
+      "input": "Modify my recent interaction with Dr. James Wilson",
+      "expected": "edit_interaction",
+      "actual": "edit_interaction",
+      "correct": true
+    },
+    {
+      "input": "Show me analytics on my interactions",
+      "expected": "analyze_trends",
+      "actual": "analyze_trends",
+      "correct": true
+    },
+    {
+      "input": "Give me a summary of engagement trends",
+      "expected": "analyze_trends",
+      "actual": "analyze_trends",
+      "correct": true
+    },
+    {
+      "input": "How many interactions have I logged?",
+      "expected": "analyze_trends",
+      "actual": "view_history",
+      "correct": false
+    },
+    {
+      "input": "Show my performance stats",
+      "expected": "analyze_trends",
+      "actual": "analyze_trends",
+      "correct": true
+    },
+    {
+      "input": "hey",
+      "expected": "generic_response",
+      "actual": "generic_response",
+      "correct": true
+    },
+    {
+      "input": "thank you",
+      "expected": "generic_response",
+      "actual": "generic_response",
+      "correct": true
+    },
+    {
+      "input": "what can you help me with?",
+      "expected": "generic_response",
+      "actual": "generic_response",
+      "correct": true
+    }
+  ]
+}

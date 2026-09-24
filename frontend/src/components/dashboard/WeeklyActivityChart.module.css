@@ -1,0 +1,139 @@
+/* ============================================================
+   WeeklyActivityChart — bulletproof bar layout
+   ============================================================ */
+
+.chartCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.25s ease;
+}
+
+.chartCard:hover {
+  box-shadow: 0 12px 24px -16px rgba(15, 23, 42, 0.15);
+}
+
+/* ---------- Header ---------- */
+.chartHeader {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.chartTitle {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.chartSubtitle {
+  font-size: 0.8125rem;
+  color: #94a3b8;
+  margin-top: 0.125rem;
+}
+
+/* ---------- Bars row ---------- */
+.barsRow {
+  display: flex;
+  align-items: flex-end;             /* bars sit on the baseline */
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* ---------- Each day column ---------- */
+.barColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;         /* stack count + track + label downward */
+  flex: 1;
+  min-width: 0;                      /* prevents overflow on narrow screens */
+  gap: 0.25rem;
+}
+
+/* Number above the bar */
+.barCount {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  line-height: 1;
+  height: 0.875rem;                  /* reserve space even when empty */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The gray track behind each bar — FIXED height, no collapse */
+.barTrack {
+  position: relative;
+  width: 100%;
+  max-width: 32px;
+  height: 120px;                     /* ← fixed px, not %, not flex */
+  background: #f1f5f9;
+  border-radius: 6px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* The colored bar itself — height comes from inline style */
+.bar {
+  width: 100%;
+  background: linear-gradient(180deg, #7c3aed, #2563eb);
+  border-radius: 6px 6px 0 0;
+  transition: height 0.4s ease, filter 0.2s ease;
+}
+
+.barColumn:hover .bar {
+  filter: brightness(1.08);
+}
+
+/* Highlight today's bar */
+.barToday {
+  background: linear-gradient(180deg, #f472b6, #ec4899);
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.35);
+}
+
+/* ---------- Day label under each bar ---------- */
+.barLabel {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 500;
+  line-height: 1;
+  margin-top: 0.25rem;
+}
+
+.barLabelToday {
+  color: #ec4899;
+  font-weight: 700;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 480px) {
+  .barTrack {
+    height: 90px;                    /* shorter on phones */
+    max-width: 26px;
+  }
+
+  .barsRow {
+    gap: 0.375rem;
+  }
+
+  .barLabel {
+    font-size: 0.6875rem;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    transition: none;
+  }
+}

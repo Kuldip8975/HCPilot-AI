@@ -1,0 +1,862 @@
+/* ============================================================
+   PriorityDashboardPage — HcPilot AI
+   ============================================================ */
+
+.priorityPage {
+  padding: 0;
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.titleIcon {
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.subtitle {
+  font-size: 0.9375rem;
+  color: #64748b;
+  margin: 0.375rem 0 0 0;
+  line-height: 1.5;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.generatedAt {
+  font-size: 0.8125rem;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+/* ---------- Refresh button ---------- */
+.refreshButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  height: 36px;
+  background: #ffffff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+  white-space: nowrap;
+}
+
+.refreshButton:hover:not(:disabled) {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px -6px rgba(37, 99, 235, 0.35);
+}
+
+.refreshButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.refreshButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.refreshButton:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Loading + Empty states
+   ============================================================ */
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem 2rem;
+  color: #64748b;
+  font-size: 0.9375rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.loadingState .spinning {
+  color: #2563eb;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9375rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  line-height: 1.55;
+}
+
+.emptyIcon {
+  color: #cbd5e1;
+}
+
+/* ============================================================
+   Priority list
+   ============================================================ */
+.priorityList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.priorityCard {
+  display: flex;
+  align-items: stretch;
+  gap: 1.125rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  animation: slideUp 0.35s ease-out backwards;
+}
+
+/* Stagger the reveal for the first 5 cards */
+.priorityCard:nth-child(1) { animation-delay: 0.03s; }
+.priorityCard:nth-child(2) { animation-delay: 0.06s; }
+.priorityCard:nth-child(3) { animation-delay: 0.09s; }
+.priorityCard:nth-child(4) { animation-delay: 0.12s; }
+.priorityCard:nth-child(5) { animation-delay: 0.15s; }
+
+.priorityCard:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -16px rgba(15, 23, 42, 0.2);
+}
+
+/* ---------- Rank ---------- */
+.rank {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  color: #475569;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.05);
+}
+
+/* ---------- Card main ---------- */
+.cardMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hcpName {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.2px;
+  line-height: 1.25;
+}
+
+.specialty {
+  display: block;
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* ---------- Score badge (KPI) ---------- */
+.scoreBadge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 48px;
+  padding: 0 0.625rem;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1.125rem;
+  letter-spacing: -0.3px;
+  box-shadow: 0 4px 10px -4px rgba(15, 23, 42, 0.15);
+}
+
+.tierHigh {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #b91c1c;
+}
+
+.tierMedium {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #b45309;
+}
+
+.tierLow {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  color: #15803d;
+}
+
+/* ---------- Reason ---------- */
+.reason {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: #334155;
+  margin: 0;
+}
+
+/* ---------- Badges ---------- */
+.badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.3125rem 0.6875rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #475569;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.badge:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.badge svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.badgePending {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.badgePending:hover {
+  background: #dbeafe;
+  border-color: #93c5fd;
+}
+
+/* ---------- Score bar ---------- */
+.scoreBar {
+  height: 6px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 0.125rem;
+}
+
+.scoreBarFill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scoreBarFill.tierHigh {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.scoreBarFill.tierMedium {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.scoreBarFill.tierLow {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+/* ============================================================
+   Actions column
+   ============================================================ */
+.cardActions {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 150px;
+}
+
+/* ---------- Log Interaction (primary) ---------- */
+.logButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  height: 38px;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: filter 0.15s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 4px 8px -4px rgba(37, 99, 235, 0.5);
+}
+
+.logButton:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 16px -8px rgba(37, 99, 235, 0.6);
+}
+
+.logButton:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+}
+
+.logButton:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* ---------- Mark Complete (secondary) ---------- */
+.completeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  height: 38px;
+  background: #ffffff;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.completeButton:hover:not(:disabled) {
+  background: #f0fdf4;
+  border-color: #86efac;
+  transform: translateY(-1px);
+}
+
+.completeButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.completeButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.completeButton:focus-visible {
+  outline: 2px solid #22c55e;
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Smart Day Planner
+   ============================================================ */
+.planSection {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem 1.375rem;
+  margin-bottom: 1.5rem;
+  animation: slideUp 0.35s ease-out;
+}
+
+.planHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.planTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.planTitleIcon {
+  color: #7c3aed;
+  flex-shrink: 0;
+}
+
+.planSubtitle {
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin: 0.25rem 0 0 0;
+}
+
+/* ---------- Analytics strip ---------- */
+.planAnalyticsStrip {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.8125rem;
+  color: #475569;
+}
+
+.planAnalyticsStrip strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.planControls {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.planInputGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.planInputLabel {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+  white-space: nowrap;
+}
+
+.planInput {
+  width: 90px;
+  padding: 0.5rem 0.625rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: #0f172a;
+}
+
+.planInput:focus {
+  outline: none;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+.planButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  height: 38px;
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: filter 0.15s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 4px 8px -4px rgba(124, 58, 237, 0.5);
+}
+
+.planButton:hover:not(:disabled) {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.planButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.planLocationNote {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.planSummary {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.125rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.planSummaryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.planSummaryValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.planSummaryLabel {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.planStopList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.planStop {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  background: #faf5ff;
+  border: 1px solid #ede9fe;
+  border-radius: 10px;
+}
+
+.planStopRank {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #7c3aed;
+  border: 1px solid #ddd6fe;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+
+.planStopInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.planStopName {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.planStopMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.planStopActions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navigateButton {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  height: 34px;
+  background: #ffffff;
+  color: #7c3aed;
+  border: 1px solid #ddd6fe;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.navigateButton:hover {
+  background: #f5f3ff;
+  border-color: #c4b5fd;
+  transform: translateY(-1px);
+}
+
+.visitedButton {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  height: 34px;
+  background: #ffffff;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.visitedButton:hover:not(:disabled) {
+  background: #f0fdf4;
+  border-color: #86efac;
+  transform: translateY(-1px);
+}
+
+.visitedButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.planSkippedNote {
+  margin-top: 1rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.8125rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.planEmptyNote {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #94a3b8;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Tablet: actions row below content */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .headerActions {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .priorityCard {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .rank {
+    align-self: flex-start;
+  }
+
+  .cardActions {
+    flex-direction: row;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .logButton,
+  .completeButton {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .planStop {
+    flex-wrap: wrap;
+  }
+
+  .planStopActions {
+    width: 100%;
+  }
+
+  .navigateButton,
+  .visitedButton {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* Mobile: tighter */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .priorityCard {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .cardTop {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .scoreBadge {
+    align-self: flex-start;
+    height: 40px;
+    min-width: 42px;
+    font-size: 1rem;
+  }
+
+  .cardActions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .logButton,
+  .completeButton {
+    width: 100%;
+  }
+
+  .badges {
+    gap: 0.375rem;
+  }
+
+  .badge {
+    font-size: 0.6875rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .planControls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .planInputGroup {
+    justify-content: space-between;
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .priorityPage,
+  .priorityCard,
+  .planSection,
+  .spinning {
+    animation: none;
+  }
+
+  .priorityCard,
+  .logButton,
+  .completeButton,
+  .refreshButton,
+  .scoreBarFill,
+  .planButton,
+  .navigateButton,
+  .visitedButton {
+    transition-duration: 0.01ms !important;
+  }
+}

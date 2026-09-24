@@ -1,0 +1,216 @@
+.recentInteractions {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.viewAll {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: transparent;
+  border: none;
+  color: #2563eb;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.viewAll:hover {
+  color: #1d4ed8;
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+}
+
+.interactionItem {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.interactionItem:hover {
+  background-color: #f8fafc;
+}
+
+.interactionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  color: #ffffff;
+}
+
+.interactionContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.interactionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.hcpName {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.interactionType {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 0.15rem 0.5rem;
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.interactionSpecialty {
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin-top: 0.1rem;
+}
+
+.interactionSummary {
+  font-size: 0.875rem;
+  color: #1e293b;
+  margin: 0.25rem 0 0.5rem 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.interactionFooter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.interactionDate {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.followUpBadge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #f59e0b;
+  padding: 0.15rem 0.5rem;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 4px;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.emptyState p {
+  margin: 0;
+}
+
+.emptyStateSub {
+  font-size: 0.8125rem;
+  margin-top: 0.25rem !important;
+}
+
+/* Scrollbar */
+.list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 2px;
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 1.25rem;
+  }
+
+  .interactionItem {
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .interactionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .interactionIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .interactionIcon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .hcpName {
+    font-size: 0.875rem;
+  }
+
+  .interactionSummary {
+    font-size: 0.8125rem;
+  }
+}
