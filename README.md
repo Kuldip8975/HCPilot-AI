@@ -3,7 +3,6 @@
 **AI-powered CRM for pharmaceutical sales representatives** — helping reps prioritize healthcare provider (HCP) visits, log interactions, and get AI-driven insights, all in one place.
 
 🔗 **Live Demo:** https://hcpilot-frontend.pages.dev
-🔗 **Backend API:** https://13-235-125-86.sslip.io/health
 
 ---
 
