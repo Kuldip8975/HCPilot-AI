@@ -1,5 +1,8 @@
 # HCPilot AI
 
+<img width="747" height="333" alt="firlsd" src="https://github.com/user-attachments/assets/52708b90-5dc7-445e-8b16-ccb84e80bd1a" />
+
+
 **AI-powered CRM for pharmaceutical sales representatives** — helping reps prioritize healthcare provider (HCP) visits, log interactions, and get AI-driven insights, all in one place.
 
 🔗 **Live Demo:** https://hcpilot-frontend.pages.dev
